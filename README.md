@@ -1,8 +1,8 @@
-## My Dotfiles
+#matheusb96/dotfiles# My Dotfiles
 
 Clone this repo
   ```
-    mkdir -p ~/code && cd ~/code && git clone https://github.com/excid3/dotfiles.git
+    mkdir -p ~/code && cd ~/code && git clone https://github.com/com:matheusb96/dotfiles.git
   ```
 
 
@@ -45,7 +45,7 @@ Install Diff-so-fancy
 
 ## Miscellaneous
 
-git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
+ `git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"`
 
 
 
