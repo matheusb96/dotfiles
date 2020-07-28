@@ -3,6 +3,7 @@ filetype off " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=/usr/local/opt/fzf
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
@@ -18,7 +19,6 @@ Plugin 'tpope/vim-endwise'
 Plugin 'geoffharcourt/vim-matchit'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
-Plugin 'tpope/vim-commentary'
 Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
 Plugin 'danro/rename.vim'
@@ -49,8 +49,10 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'calebsmith/vim-lambdify'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'joshdick/onedark.vim'
-Plugin 'tpope/vim-commentary.vim'
-Plugin 'mileszs/ack.vim'
+Plugin 'junegunn/fzf.vim'
+Plugin 'tpope/vim-commentary'
+Plugin 'othree/yajs.vim'
+Plugin 'mxw/vim-jsx'
 
 call vundle#end()  
 
@@ -170,19 +172,6 @@ au FileType ruby map <Leader>s :call RunNearestSpec()<CR>
 au FileType ruby map <Leader>a :call RunAllSpecs()<CR>
 au FileType ruby let g:rspec_command = "!bundle exec rspec --drb {spec}"
 
-" go
-au FileType go nmap <Leader>s <Plug>(go-implements)
-au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-
 " Rainbow parentheses
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
@@ -198,13 +187,14 @@ nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 
 syntax on
 colorscheme onedark
-" nnoremap <C-c> "+
-" vnoremap <C-c> "+y
-" nnoremap <C-v> "+gP
-" vnoremap <C-v> "+gP
 let NERDTreeShowHidden=0
 let g:NERDTreeIgnore = ['^node_modules$', '^bower_components$']
 
 set list
 set listchars=tab:>-
-let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" Open and switches tabs
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+
+
