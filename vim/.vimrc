@@ -8,10 +8,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Bundles
-Plugin 'tpope/vim-surround'
 Plugin 'ervandew/supertab'
 Plugin 'Lokaltog/vim-powerline'
-"Plugin 'bling/vim-airline'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'Keithbsmiley/rspec.vim'
@@ -34,25 +32,23 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'pangloss/vim-javascript'
 Plugin 'jeyb/vim-jst'
 Plugin 'terryma/vim-multiple-cursors' 
-"Plugin 'scrooloose/syntastic'
 Plugin 'gorkunov/smartpairs.vim'
 Plugin 'pbrisbin/vim-mkdir'
 Plugin 'fatih/vim-go'
 Plugin 'mattonrails/vim-mix'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'carlosgaldino/elixir-snippets'
-Plugin 'rking/ag.vim'
-"Plugin 'rainerborene/vim-reek'
+Plugin 'mileszs/ack.vim'
 Plugin 'raichoo/haskell-vim'
 Plugin 'vim-scripts/c.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'calebsmith/vim-lambdify'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'joshdick/onedark.vim'
-Plugin 'junegunn/fzf.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'othree/yajs.vim'
-Plugin 'mxw/vim-jsx'
+Plugin 'junegunn/goyo.vim'
+Plugin 'rking/ag.vim'
 
 call vundle#end()  
 
@@ -170,7 +166,7 @@ endif
 au FileType ruby map <Leader>r :call RunCurrentSpecFile()<CR>
 au FileType ruby map <Leader>s :call RunNearestSpec()<CR>
 au FileType ruby map <Leader>a :call RunAllSpecs()<CR>
-au FileType ruby let g:rspec_command = "!bundle exec rspec --drb {spec}"
+au FileType ruby let g:rspec_command = "!bundle exec rspec --drb {spec} --format documentation --color"
 
 " Rainbow parentheses
 au VimEnter * RainbowParenthesesToggle
@@ -197,4 +193,5 @@ set listchars=tab:>-
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 
-
+let g:ag_working_path_mode="r"
+let g:ackprg = 'ag --nogroup --nocolor --column'
