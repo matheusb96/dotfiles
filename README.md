@@ -10,19 +10,27 @@ Install Homebrew
   ```
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   ```
-
-Install MacVim, rbenv, ruby-build, and more
-  ```
-    brew install macvim rbenv ruby-build postgresql elasticsearch redis zsh mysql
-    brew install Caskroom/cask/iterm2
-    brew install Caskroom/cask/google-chrome
-  ```
-
+  
 Install Oh-My-ZSH
   ```
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   ```
 
+Install brew formulas
+  ```
+    brew install asdf coreutils curl git the_silver_searcher gpg gawk yarn jmeter kubectl kubectx stern
+  ```
+
+Install brew databases formulas
+  ```
+    brew install mysql postgresql
+  ```
+  
+Install brew casks
+  ```
+    brew install --cask iterm2 postman spotify brave-browser tableplus slack
+  ```
+  
 Install Diff-so-fancy
 
   ```
