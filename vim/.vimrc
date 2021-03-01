@@ -24,13 +24,10 @@ Plugin 'thoughtbot/vim-rspec'
 Plugin 'aaronj1335/underscore-templates.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
-Plugin 'bridgeutopia/snipmate-snippets'
-Plugin 'garbas/vim-snipmate'
 Plugin 'vim-scripts/bufkill.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'pangloss/vim-javascript'
-Plugin 'jeyb/vim-jst'
 Plugin 'terryma/vim-multiple-cursors' 
 Plugin 'gorkunov/smartpairs.vim'
 Plugin 'pbrisbin/vim-mkdir'
@@ -42,13 +39,12 @@ Plugin 'mileszs/ack.vim'
 Plugin 'raichoo/haskell-vim'
 Plugin 'vim-scripts/c.vim'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'calebsmith/vim-lambdify'
+" Plugin 'calebsmith/vim-lambdify'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'joshdick/onedark.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'othree/yajs.vim'
 Plugin 'junegunn/goyo.vim'
-Plugin 'rking/ag.vim'
 
 call vundle#end()  
 
@@ -194,5 +190,14 @@ nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 
 let g:ag_working_path_mode="r"
-let g:ackprg = 'ag --nogroup --nocolor --column'
 
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --smart-case'
+  cnoreabbrev ag Ack
+  cnoreabbrev aG Ack
+  cnoreabbrev Ag Ack
+  cnoreabbrev AG Ack
+  cnoreabbrev Ack Ack!
+endif
+
+nnoremap <Leader>a :Ack!<Space>
