@@ -1,10 +1,5 @@
 ## My Dotfiles
 
-Clone this repo
-  ```
-    mkdir -p ~/code && cd ~/code && git clone https://github.com/com/matheusb96/dotfiles.git
-  ```
-
 
 Install Homebrew
   ```
