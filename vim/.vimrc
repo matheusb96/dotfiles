@@ -21,30 +21,25 @@ Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
 Plugin 'danro/rename.vim'
 Plugin 'thoughtbot/vim-rspec'
-Plugin 'aaronj1335/underscore-templates.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'vim-scripts/bufkill.vim'
-Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'pangloss/vim-javascript'
 Plugin 'terryma/vim-multiple-cursors' 
 Plugin 'gorkunov/smartpairs.vim'
 Plugin 'pbrisbin/vim-mkdir'
 Plugin 'fatih/vim-go'
-Plugin 'mattonrails/vim-mix'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'carlosgaldino/elixir-snippets'
 Plugin 'mileszs/ack.vim'
-Plugin 'raichoo/haskell-vim'
-Plugin 'vim-scripts/c.vim'
 Plugin 'airblade/vim-gitgutter'
-" Plugin 'calebsmith/vim-lambdify'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'joshdick/onedark.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'othree/yajs.vim'
 Plugin 'junegunn/goyo.vim'
+Plugin 'iamcco/markdown-preview.nvim'
 
 call vundle#end()  
 
@@ -105,6 +100,7 @@ set foldminlines=4
 set foldopen-=undo      " don't open folds when you undo stuff
 
 set virtualedit=block
+set backspace=indent,eol,start
 
 autocmd BufRead *irb-interactive* setl ft=ruby
 autocmd BufRead nginx.conf setl ft=nginx
@@ -153,15 +149,14 @@ nnoremap <silent> <C-b> <CR>:CtrlPBuffer<cr>
 
 " gist
 if has("macunix")
-  let g:gist_clip_command = 'pbcopy'
+ let g:gist_clip_command = 'pbcopy'
 else
-  let g:gist_clip_command = 'xclip -selection clipboard'
+ let g:gist_clip_command = 'xclip -selection clipboard'
 endif
 
 " rspec
 au FileType ruby map <Leader>r :call RunCurrentSpecFile()<CR>
 au FileType ruby map <Leader>s :call RunNearestSpec()<CR>
-au FileType ruby map <Leader>a :call RunAllSpecs()<CR>
 au FileType ruby let g:rspec_command = "!bundle exec rspec --drb {spec} --format documentation --color"
 
 " Rainbow parentheses
@@ -170,12 +165,9 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-" easymotion
-map <Leader> <Plug>(easymotion-prefix)
-
 " NerdTree
 "map <C-n> :NERDTreeToggle<CR>
-nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+nnoremap <silent> <C-N> :NERDTreeToggle<CR>
 
 syntax on
 colorscheme onedark
@@ -192,12 +184,20 @@ nnoremap <C-Right> :tabnext<CR>
 let g:ag_working_path_mode="r"
 
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep --smart-case'
-  cnoreabbrev ag Ack
-  cnoreabbrev aG Ack
-  cnoreabbrev Ag Ack
-  cnoreabbrev AG Ack
-  cnoreabbrev Ack Ack!
+ let g:ackprg = 'ag --vimgrep --smart-case'
+ cnoreabbrev ag Ack
+ cnoreabbrev aG Ack
+ cnoreabbrev Ag Ack
+ cnoreabbrev AG Ack
+ cnoreabbrev Ack Ack!
 endif
 
 nnoremap <Leader>a :Ack!<Space>
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+
+nmap <C-T> <Plug>MarkdownPreviewToggle
