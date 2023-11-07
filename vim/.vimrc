@@ -1,4 +1,4 @@
-set nocompatible              
+set nocompatible
 syntax on
 set nowrap
 set ignorecase
@@ -39,7 +39,7 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'vim-scripts/bufkill.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'pangloss/vim-javascript'
-Plugin 'terryma/vim-multiple-cursors' 
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'gorkunov/smartpairs.vim'
 Plugin 'pbrisbin/vim-mkdir'
 Plugin 'fatih/vim-go'
@@ -55,7 +55,7 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'vimwiki/vimwiki'
 
-call vundle#end()  
+call vundle#end()
 
 filetype plugin indent on
 syntax on
@@ -84,7 +84,7 @@ set autoread
 set splitright
 set splitbelow
 set hidden
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 set timeoutlen=500
 set showmatch
