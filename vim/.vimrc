@@ -1,5 +1,4 @@
 set nocompatible              
-syntax on
 set nowrap
 set ignorecase
 set smartcase
@@ -27,24 +26,18 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'Keithbsmiley/rspec.vim'
 Plugin 'tpope/vim-endwise'
-Plugin 'geoffharcourt/vim-matchit'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
-Plugin 'mattn/webapi-vim'
-Plugin 'mattn/gist-vim'
+Plugin 'mattn/vim-gist'
 Plugin 'danro/rename.vim'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'vim-scripts/bufkill.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'pangloss/vim-javascript'
-Plugin 'terryma/vim-multiple-cursors' 
+Plugin 'mg979/vim-visual-multi' 
 Plugin 'gorkunov/smartpairs.vim'
 Plugin 'pbrisbin/vim-mkdir'
 Plugin 'fatih/vim-go'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'carlosgaldino/elixir-snippets'
 Plugin 'mileszs/ack.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'kien/rainbow_parentheses.vim'
@@ -54,6 +47,7 @@ Plugin 'othree/yajs.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'vimwiki/vimwiki'
+Plugin 'mattn/webapi-vim'
 
 call vundle#end()  
 
@@ -129,16 +123,6 @@ nmap U <nop>
 " Remove trailing spaces
 autocmd FileType ruby,eruby,javascript,jst,go autocmd BufWritePre <buffer> :%s/\s\+$//e
 
-" Multiple cursors
-
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_start_word_key      ='<F5>'
-let g:multi_cursor_start_key           ='<F5>'
-let g:multi_cursor_next_key            ='<C-n>'
-let g:multi_cursor_prev_key            ='<C-p>'
-let g:multi_cursor_skip_key            ='<C-k>'
-let g:multi_cursor_quit_key            ='<Esc>'
-
 " Powerline
 let g:Powerline_symbols='fancy'
 
@@ -177,13 +161,13 @@ au Syntax * RainbowParenthesesLoadBraces
 """""""""""""""""""""""""""""""""""""
 
 " NerdTree
-"map <C-n> :NERDTreeToggle<CR>
-nnoremap <silent> <C-N> :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+
+let NERDTreeShowHidden=0
+let g:NERDTreeIgnore = ['^node_modules$', '^bower_components$']
 
 syntax on
 colorscheme onedark
-let NERDTreeShowHidden=0
-let g:NERDTreeIgnore = ['^node_modules$', '^bower_components$']
 
 set list
 set listchars=tab:>-
@@ -222,4 +206,6 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+set tw=120
+set updatetime=100
 let base16colorspace=256  " Access colors present in 256 colorspace
