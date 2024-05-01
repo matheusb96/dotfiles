@@ -13,7 +13,7 @@ Install Oh-My-ZSH
 
 Install brew formulas
   ```
-    brew install asdf coreutils curl git the_silver_searcher gpg gawk yarn kubectl kubectx stern
+    brew install asdf coreutils curl git ag the_silver_searcher gpg gawk yarn kubectl kubectx stern tree
   ```
 
 Install brew databases formulas
