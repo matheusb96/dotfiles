@@ -13,7 +13,8 @@ Install Oh-My-ZSH
 
 Install brew formulas
   ```
-    brew install asdf coreutils curl git ag the_silver_searcher gpg gawk yarn kubectl kubectx stern tree
+    brew install asdf coreutils curl git ag the_silver_searcher gpg gawk yarn kubectl kubectx stern tree neovim ripgrep
+
   ```
 
 Install brew databases formulas
@@ -23,7 +24,7 @@ Install brew databases formulas
   
 Install brew casks
   ```
-    brew install --cask iterm2 postman spotify brave-browser tableplus slack
+    brew install --cask iterm2 postman spotify brave-browser tableplus slack 
   ```
   
 Install Diff-so-fancy
