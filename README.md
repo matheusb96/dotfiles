@@ -13,7 +13,7 @@ Install Oh-My-ZSH
 
 Install brew formulas
   ```
-    brew install asdf coreutils curl git the_silver_searcher gpg gawk yarn jmeter kubectl kubectx stern
+    brew install asdf coreutils curl git the_silver_searcher gpg gawk yarn kubectl kubectx stern
   ```
 
 Install brew databases formulas
@@ -48,7 +48,7 @@ Install Diff-so-fancy
 
 ## Miscellaneous
 
- `git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"`
+ `git config --global alias.hist "log --pretty=format:'%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) | %C(red)%s %C(bold red){{%an}}%C(reset) %C(blue)%d%C(reset)' --graph --date=short"`
 
 
 
