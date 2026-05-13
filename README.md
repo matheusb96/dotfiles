@@ -1,32 +1,45 @@
 ## My Dotfiles
 
-
 Install Homebrew
   ```
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  ```
-  
-Install Oh-My-ZSH
-  ```
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   ```
 
-Install brew formulas
+Install Ruby build dependencies
   ```
-    brew install asdf coreutils curl git ag the_silver_searcher gpg gawk yarn kubectl kubectx stern tree neovim ripgrep
+    brew install libyaml openssl@3 readline zlib gmp autoconf
+  ```
 
+Install core tooling
+  ```
+    brew install git gh curl coreutils gnupg gawk tree neovim jq
   ```
 
-Install brew databases formulas
+Install version manager
   ```
-    brew install mysql postgresql
+    brew install mise
   ```
-  
+
+Install databases
+  ```
+    brew install postgresql@17 libpq redis
+  ```
+
+Install dev tooling
+  ```
+    brew install overmind heroku railway
+  ```
+
+Install CLI tools
+  ```
+    brew install ripgrep fd fzf bat eza starship
+  ```
+
 Install brew casks
   ```
-    brew install --cask iterm2 postman spotify brave-browser tableplus slack 
+    brew install --cask ghostty postman spotify brave-browser tableplus slack
   ```
-  
+
 Install Diff-so-fancy
 
   ```
@@ -47,9 +60,14 @@ Install Diff-so-fancy
     git config --global color.diff.whitespace "red reverse"
   ```
 
+## Symlink configs
+
+  ```
+    ln -sf "$PWD/.zshrc" ~/.zshrc
+    mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
+    ln -sf "$PWD/ghostty/config" "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+  ```
+
 ## Miscellaneous
 
  `git config --global alias.hist "log --pretty=format:'%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) | %C(red)%s %C(bold red){{%an}}%C(reset) %C(blue)%d%C(reset)' --graph --date=short"`
-
-
-

@@ -1,0 +1,21 @@
+# Theme
+theme = Catppuccin Frappe
+
+# Font
+font-family = JetBrains Mono
+font-size = 15
+
+# Window
+window-padding-x = 8
+window-padding-y = 6
+window-padding-balance = true
+
+# Background
+background-opacity = 0.96
+background-blur = 12
+
+# Cursor
+cursor-style = bar
+
+# Mouse
+mouse-hide-while-typing = true
