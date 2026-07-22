@@ -1,7 +1,7 @@
 ---
 name: codex-review
 description: >-
-  Run an independent code review with Codex (gpt-5.5) over the current repo's
+  Run an independent code review with Codex (gpt-5.6-sol) over the current repo's
   changes and surface the findings. Use when the user says /codex-review, asks
   for a codex review, or wants a second (non-Claude) pair of eyes on a diff,
   branch, or commit before shipping.
@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 # codex-review
 
-`/codex-review [target]` runs `codex review` (gpt-5.5, via the local Codex CLI) against the
+`/codex-review [target]` runs `codex review` (gpt-5.6-sol, via the local Codex CLI) against the
 current git repository and reports the findings verbatim, then a short synthesis. This is the
 manual counterpart to the `reviewer` agent's automatic codex pass — reach for it when you want
 an independent perspective without a full review dispatch.
@@ -31,7 +31,7 @@ Map the `[target]` argument (if any) to a `codex review` invocation. Default = u
 | a specific commit SHA | `codex review --commit <sha>` |
 | custom focus (e.g. "just the SQL") | append the instruction as the prompt arg: `codex review --uncommitted "focus on the SQL changes"` |
 
-`codex review` is non-interactive and uses the Codex config default model (`gpt-5.5`). To force a model, add `-c model="<name>"`.
+`codex review` is non-interactive and uses the Codex config default model (`gpt-5.6-sol`). To force a model, add `-c model="<name>"`.
 
 ## Steps
 
@@ -43,5 +43,5 @@ Map the `[target]` argument (if any) to a `codex review` invocation. Default = u
 
 ## Notes
 
-- Findings are gpt-5.5's opinion — weigh them, don't apply blindly. Cross-check anything that contradicts the repo's `AGENTS.md` conventions.
+- Findings are gpt-5.6-sol's opinion — weigh them, don't apply blindly. Cross-check anything that contradicts the repo's `AGENTS.md` conventions.
 - For a merged Claude + codex review in one shot, dispatch the `reviewer` agent instead; use this skill when you specifically want the raw codex pass.

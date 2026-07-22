@@ -29,7 +29,7 @@ Solo founder-engineer. Main stack: Rails 7.2, Ruby 3.2, Postgres, Minitest + fix
 | **opus-4.8** | main thread · `planner` · `reviewer` | hard reasoning, planning, review taste, coordination |
 | **sonnet-5** | `implementer` · `investigator` | clear-spec impl, code location, data analysis |
 | **fable-5** | `advisor` · impeccable / dispatch | steering/taste calls (rare, ~once/task), UI, copy, API-design |
-| **gpt-5.5** | `codex review` CLI only | independent review perspective (review-only here) |
+| **gpt-5.6-sol** | `codex review` CLI only | independent review perspective (review-only here) |
 | **haiku** | cavecrew-* | quick compressed lookups only |
 
 - Escalate freely: if a cheaper model's output misses the bar, rerun on a smarter one — judge the output, not the price tag.

@@ -2,7 +2,7 @@
 name: reviewer
 description: >
   Independent review of a diff, branch, or file. Runs its own opus read AND
-  a `codex review` (gpt-5.5) second perspective when in a git repo, then
+  a `codex review` (gpt-5.6-sol) second perspective when in a git repo, then
   merges and de-dupes into one severity-ranked list. Terse, one line per
   finding, no praise, no scope creep. Use for "review my diff", "review this
   branch/PR", "audit this file".
@@ -18,7 +18,7 @@ First read the repo's `AGENTS.md`/`CLAUDE.md` so findings respect its convention
 
 1. **Scope the change.** Use read-only git: `git diff`, `git diff <base>...HEAD`, `git log -p`, `git show <sha>`. Read the touched files for context.
 2. **Own pass (opus).** Judge correctness, edge cases, security, data-loss, races, missing guards, and violations of the repo's conventions.
-3. **Codex second perspective.** If inside a git repo, shell out for an independent gpt-5.5 read:
+3. **Codex second perspective.** If inside a git repo, shell out for an independent gpt-5.6-sol read:
    - Working-tree changes: `codex review --uncommitted`
    - Branch vs base: `codex review --base <base-branch>`
    - A commit: `codex review --commit <sha>`
