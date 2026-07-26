@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Machine-local Claude Code state. Everything else under ~/.claude — history.jsonl,
+# caches, credentials — is deliberately never symlinked into this repo.
+.claude/settings.local.json
+.claude/*.local.json
+
+# Secrets and machine-local overrides. Nothing here should ever be committed.
+.env
+.env.*
+*.local
+.zshrc.local
+
+# Backups left by the symlink steps in the README
+*.backup-*
+*.orig
+
+node_modules/
