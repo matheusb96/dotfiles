@@ -111,6 +111,12 @@ alias rw='railway'
 alias rwrun='railway run'
 alias rwlogs='railway logs'
 
+# Kamal: source production secrets, then run kamal (run from project root)
+kamalp() { ( set -a; source .env.production 2>/dev/null; set +a; bundle exec kamal "$@" ); }
+
 # Option + Left / Right: move by word
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
+
+# Machine-local / project-specific overrides (not tracked)
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"

@@ -1,0 +1,117 @@
+{
+  "link_to": {
+    "prefix": "link_to",
+    "body": "link_to ${1:\"Text\"}, ${2:path}",
+    "description": "Rails link_to helper"
+  },
+  "link_to block": {
+    "prefix": "link_to_block",
+    "body": "link_to ${1:path} do\n\t$0\nend",
+    "description": "Rails link_to with block"
+  },
+  "button_to": {
+    "prefix": "button_to",
+    "body": "button_to ${1:\"Text\"}, ${2:path}, method: :${3:post}",
+    "description": "Rails button_to helper"
+  },
+  "form_with": {
+    "prefix": "form_with",
+    "body": "form_with model: ${1:@model}, local: true do |${2:f}|\n\t$0\nend",
+    "description": "Rails form_with"
+  },
+  "form_for": {
+    "prefix": "form_for",
+    "body": "form_for ${1:@model} do |${2:f}|\n\t$0\nend",
+    "description": "Rails form_for"
+  },
+  "form_tag": {
+    "prefix": "form_tag",
+    "body": "form_tag ${1:path}, method: :${2:post} do\n\t$0\nend",
+    "description": "Rails form_tag"
+  },
+  "image_tag": {
+    "prefix": "image_tag",
+    "body": "image_tag ${1:\"image.png\"}${2:, alt: \"${3:alt}\"}",
+    "description": "Rails image_tag"
+  },
+  "content_tag": {
+    "prefix": "content_tag",
+    "body": "content_tag :${1:div}, ${2:content}${3:, class: \"${4:}\"}",
+    "description": "Rails content_tag"
+  },
+  "tag": {
+    "prefix": "tag",
+    "body": "tag.${1:div} ${2:content}${3:, class: \"${4:}\"}",
+    "description": "Rails tag builder"
+  },
+  "render partial": {
+    "prefix": "render",
+    "body": "render ${1:\"partial\"}${2:, ${3:local}: ${4:value}}",
+    "description": "Rails render"
+  },
+  "render collection": {
+    "prefix": "render_collection",
+    "body": "render partial: ${1:\"item\"}, collection: ${2:@items}",
+    "description": "Rails render collection"
+  },
+  "number_to_currency": {
+    "prefix": "number_to_currency",
+    "body": "number_to_currency(${1:amount})",
+    "description": "Rails number_to_currency"
+  },
+  "truncate": {
+    "prefix": "truncate",
+    "body": "truncate(${1:text}, length: ${2:30})",
+    "description": "Rails truncate"
+  },
+  "pluralize": {
+    "prefix": "pluralize",
+    "body": "pluralize(${1:count}, ${2:\"item\"})",
+    "description": "Rails pluralize"
+  },
+  "time_ago_in_words": {
+    "prefix": "time_ago_in_words",
+    "body": "time_ago_in_words(${1:time})",
+    "description": "Rails time_ago_in_words"
+  },
+  "form input field": {
+    "prefix": "text_field",
+    "body": "${1:f}.text_field :${2:attribute}${3:, class: \"${4:}\"}",
+    "description": "Rails form text_field"
+  },
+  "form submit": {
+    "prefix": "submit",
+    "body": "${1:f}.submit ${2:\"Save\"}${3:, class: \"${4:}\"}",
+    "description": "Rails form submit"
+  },
+  "form label": {
+    "prefix": "label",
+    "body": "${1:f}.label :${2:attribute}",
+    "description": "Rails form label"
+  },
+  "select": {
+    "prefix": "select",
+    "body": "${1:f}.select :${2:attribute}, ${3:options}",
+    "description": "Rails form select"
+  },
+  "collection_select": {
+    "prefix": "collection_select",
+    "body": "collection_select :${1:object}, :${2:method}, ${3:collection}, :${4:value}, :${5:text}",
+    "description": "Rails collection_select"
+  },
+  "csrf_meta_tags": {
+    "prefix": "csrf_meta_tags",
+    "body": "csrf_meta_tags",
+    "description": "Rails csrf_meta_tags"
+  },
+  "stylesheet_link_tag": {
+    "prefix": "stylesheet_link_tag",
+    "body": "stylesheet_link_tag ${1:\"application\"}",
+    "description": "Rails stylesheet_link_tag"
+  },
+  "javascript_include_tag": {
+    "prefix": "javascript_include_tag",
+    "body": "javascript_include_tag ${1:\"application\"}",
+    "description": "Rails javascript_include_tag"
+  }
+}

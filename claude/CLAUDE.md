@@ -21,6 +21,9 @@ Solo founder-engineer. Main stack: Rails 7.2, Ruby 3.2, Postgres, Minitest + fix
 - **Never guess third-party API payload shapes.** If docs aren't fetchable, ask me to paste the verbatim spec.
 - **Stop guessing → read source.** After ~2 failed fixes on unfamiliar tooling, read the gem/docs, confirm the mechanism, then fix.
 - **Git:** commit on a feature branch + open PRs as **draft** without asking; **never** push to main, mark ready, or merge unprompted. Never auto-commit spec/planning docs — I commit those manually.
+- **Never claim verification you didn't perform.** No "verified manually" / "tested in the browser" in a PR body, commit, or summary unless it actually ran this session. State what ran and what didn't, and hand the rest over as an explicit open item.
+- **Cover the basic path before the new behavior.** Assert "does the fundamental interaction still work" first, then the feature on top of it. If a plan flags an untested layer (Stimulus/JS especially), writing that test is in scope for the change, not a follow-up. Cover failure branches too, not just success.
+- **A test that has never failed proves nothing.** Mutate the code and confirm the test goes red. A test written after a *reported* bug that passes first try means the test is wrong, not the code.
 
 ## Model routing (defaults, not limits)
 

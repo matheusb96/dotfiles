@@ -1,0 +1,14 @@
+{
+  "extras": [
+    "lazyvim.plugins.extras.lang.ruby",
+    "lazyvim.plugins.extras.lang.typescript",
+    "lazyvim.plugins.extras.lang.tailwind",
+    "lazyvim.plugins.extras.test.core",
+    "lazyvim.plugins.extras.dap.core"
+  ],
+  "install_version": 8,
+  "news": {
+    "NEWS.md": "11866"
+  },
+  "version": 8
+}
