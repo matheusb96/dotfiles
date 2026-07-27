@@ -1,0 +1,12 @@
+{
+  "name": "rails-helpers",
+  "engines": { "vscode": "^1.11.0" },
+  "contributes": {
+    "snippets": [
+      {
+        "language": ["ruby", "eruby"],
+        "path": "./rails-helpers.json"
+      }
+    ]
+  }
+}
