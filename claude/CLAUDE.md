@@ -1,4 +1,4 @@
-# Standing brief — Matheus / Claude Code
+# Standing brief — Matheus / coding agents
 
 Written for a reader with zero history: every session starts here. Universal working style + safety rules live in this file. **Project-specific rules live in each repo's `AGENTS.md`/`CLAUDE.md` — read those first when in a repo; don't duplicate them here.**
 
@@ -37,16 +37,13 @@ You choose *when* to run a gate, never *whether*. Slow gates run on changed file
 
 ## Subagents: spawn on purpose, not by role
 
-`planner`, `implementer`, `reviewer`, `investigator`, `advisor` exist as agent definitions. None is a mandatory phase. Default is doing the work in the main thread; spawn only when it buys something one context can't:
+No named roles. The main thread holds the whole task and does the work; skills add capability to it. Spawn a subagent (whatever the harness offers) only when it buys something one context can't:
 
-- **Context hygiene.** The bill is cache-reads of the main thread, re-read every turn. Big reads (map a dir, list callers, grep a log) go to a read-only `investigator`/`Explore`; only the compact answer comes back. Ask for evidence (`file:line` + excerpt), not verdicts, and spot-verify any load-bearing claim yourself — a confident-but-wrong summary is the real risk (it has happened).
-- **Fresh eyes.** The author of a diff believes it works; a `reviewer` in a fresh context doesn't. Worth it for big diffs, auth/money/data paths, unfamiliar areas, anything user-facing. Skip on greenfield and rote changes.
-- **Fan-out.** The same mechanical change across many files → parallel `implementer` workers. Map-reduce, not an assembly line.
-- **A steer when stuck.** Two failed attempts, or a real design/taste/API-shape fork → one `advisor` call. Direction, not code.
+- **Context hygiene.** The bill is cache-reads of the main thread, re-read every turn. Big reads (map a dir, list callers, grep a log) go to a read-only subagent; only the compact answer comes back. Ask for evidence (`file:line` + excerpt), not verdicts, and spot-verify any load-bearing claim yourself — a confident-but-wrong summary is the real risk (it has happened).
+- **Fresh eyes.** The author of a diff believes it works; an independent read in a fresh context doesn't — a subagent, or a second model. Worth it for big diffs, auth/money/data paths, unfamiliar areas, anything user-facing. Skip on greenfield and rote changes.
+- **Fan-out.** The same mechanical change across many files → parallel workers. Map-reduce, not an assembly line.
 
-Don't announce a phase plan and wait for sign-off. Don't spawn a fresh session to write a commit message or PR body the working context already holds.
-
-**Model hints, not rules.** Main thread runs Fable. `investigator`/`Explore` on sonnet — extraction quality is model-flat, the smarts are in the ask. `codex review` (gpt-5.6-sol) for an independent second read. `cavecrew-*` (haiku) for quick lookups only; never Haiku for judgment. UI/copy → the **impeccable** skill. Override per call whenever the output misses the bar.
+Don't announce a phase plan and wait for sign-off. Don't spawn a fresh session to write a commit message or PR body the working context already holds. Model choice belongs to the harness; the one rule is never a small model for judgment work — for anything that ships, intelligence > taste > cost.
 
 ## Operating rules
 
@@ -57,7 +54,7 @@ Don't announce a phase plan and wait for sign-off. Don't spawn a fresh session t
 
 ## Loops
 
-For multi-step work, run a controlled loop, not one-shot prompts: `goal → plan → execute → verify → (fail routes back) → stop`. Use the native `/loop` for this.
+For multi-step work, run a controlled loop, not one-shot prompts: `goal → plan → execute → verify → (fail routes back) → stop`. Use the harness's loop primitive when it has one.
 **Always set a stop condition** — no finish line = token leak. Good ones:
 - "stop when the Definition of Done holds"
 - "stop when the plan lists every file group, risk, and rollback path"

@@ -11,9 +11,8 @@ disable-model-invocation: true
 # codex-review
 
 `/codex-review [target]` runs `codex review` (gpt-5.6-sol, via the local Codex CLI) against the
-current git repository and reports the findings verbatim, then a short synthesis. This is the
-manual counterpart to the `reviewer` agent's automatic codex pass — reach for it when you want
-an independent perspective without a full review dispatch.
+current git repository and reports the findings verbatim, then a short synthesis. Reach for it
+when you want an independent read in a fresh context.
 
 ## Preconditions
 
@@ -39,9 +38,8 @@ Map the `[target]` argument (if any) to a `codex review` invocation. Default = u
 2. Determine the target (from the argument, else default to `--uncommitted`; if the user is clearly reviewing a feature branch, use `--base main`).
 3. Run the chosen `codex review` command via Bash from the repo root. It streams its own findings.
 4. Relay the findings **verbatim**, then add a 2-4 line synthesis: what's most severe, what (if anything) blocks shipping, quick wins.
-5. Do not edit code or commit — this skill only reviews. If the user wants fixes applied, hand off to the `implementer` or make the edits in a separate, explicit step.
+5. Do not edit code or commit — this skill only reviews. If the user wants fixes applied, make the edits in a separate, explicit step.
 
 ## Notes
 
 - Findings are gpt-5.6-sol's opinion — weigh them, don't apply blindly. Cross-check anything that contradicts the repo's `AGENTS.md` conventions.
-- For a merged Claude + codex review in one shot, dispatch the `reviewer` agent instead; use this skill when you specifically want the raw codex pass.

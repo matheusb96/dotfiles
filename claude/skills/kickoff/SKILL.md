@@ -53,5 +53,5 @@ and the unknowns. **Wait for approval before executing.**
 ## Then
 
 1. Present the brief. **Do not edit anything yet** — get approval on scope + plan.
-2. On approval, run the loop chunk by chunk against the definition of done. Spawn subagents only for what the brief allows (big reads, fresh-eyes review, fan-out, a steer when stuck) — no planner → implementer → reviewer relay.
+2. On approval, run the loop chunk by chunk against the definition of done. Spawn subagents only for what the brief allows (big reads, fresh-eyes review, fan-out) — no specifier → coder → reviewer relay.
 3. Hold to the stop condition. If blocked, produce the blocker report instead of grinding.

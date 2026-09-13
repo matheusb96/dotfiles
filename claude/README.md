@@ -1,11 +1,10 @@
 # Claude Code setup
 
-Portable scaffolding for `~/.claude` — standing brief, subagent roster, custom skills, caveman hooks, settings.
+Portable scaffolding for `~/.claude` — standing brief, custom skills, caveman hooks, settings.
 
 ```
 CLAUDE.md        standing brief — working style, hard rules, definition of done, when to spawn subagents
 settings.json    model, hooks, statusline, enabled plugins/marketplaces
-agents/          planner · implementer · reviewer · investigator · advisor
 skills/          codex-review · forensics · kickoff · no-mistakes
 hooks/           caveman mode: activate, mode-tracker, stats, statusline
 ```
@@ -15,7 +14,6 @@ hooks/           caveman mode: activate, mode-tracker, stats, statusline
 ```sh
 ln -sf  "$PWD/claude/CLAUDE.md"     ~/.claude/CLAUDE.md
 ln -sf  "$PWD/claude/settings.json" ~/.claude/settings.json
-ln -sfn "$PWD/claude/agents"        ~/.claude/agents
 ln -sfn "$PWD/claude/hooks"         ~/.claude/hooks
 mkdir -p ~/.claude/skills
 for s in codex-review forensics kickoff no-mistakes; do
