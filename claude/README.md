@@ -3,7 +3,7 @@
 Portable scaffolding for `~/.claude` — standing brief, subagent roster, custom skills, caveman hooks, settings.
 
 ```
-CLAUDE.md        standing brief — working style, hard rules, model routing, orchestration
+CLAUDE.md        standing brief — working style, hard rules, definition of done, when to spawn subagents
 settings.json    model, hooks, statusline, enabled plugins/marketplaces
 agents/          planner · implementer · reviewer · investigator · advisor
 skills/          codex-review · forensics · kickoff · no-mistakes

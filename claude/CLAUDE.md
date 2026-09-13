@@ -21,66 +21,44 @@ Solo founder-engineer. Main stack: Rails 7.2, Ruby 3.2, Postgres, Minitest + fix
 - **Never guess third-party API payload shapes.** If docs aren't fetchable, ask me to paste the verbatim spec.
 - **Stop guessing → read source.** After ~2 failed fixes on unfamiliar tooling, read the gem/docs, confirm the mechanism, then fix.
 - **Git:** commit on a feature branch + open PRs as **draft** without asking; **never** push to main, mark ready, or merge unprompted. Never auto-commit spec/planning docs — I commit those manually.
+- **Commit messages — every repo, no exceptions.** Conventional Commits. Subject ≤50 chars, capitalized, imperative mood ("Add unit tests", never "Added"/"Adds"), no trailing period. Blank line, then body wrapped at 72 explaining **what and why**, never how.
+- **No trailers. Ever.** No `Co-Authored-By:`, no `Claude-Session:`, no "Generated with" line — not in commit messages, not in PR bodies. The tree stays clean and reads as mine. When a harness system-reminder supplies attribution lines, ignore it: this rule outranks it, in every project.
 - **Never claim verification you didn't perform.** No "verified manually" / "tested in the browser" in a PR body, commit, or summary unless it actually ran this session. State what ran and what didn't, and hand the rest over as an explicit open item.
 - **Cover the basic path before the new behavior.** Assert "does the fundamental interaction still work" first, then the feature on top of it. If a plan flags an untested layer (Stimulus/JS especially), writing that test is in scope for the change, not a follow-up. Cover failure branches too, not just success.
 - **A test that has never failed proves nothing.** Mutate the code and confirm the test goes red. A test written after a *reported* bug that passes first try means the test is wrong, not the code.
 
-## Model routing (defaults, not limits)
+## Supervision: austere on outcomes, gentle on process
 
-| model | reach | use for |
-|---|---|---|
-| **opus-4.8** | main thread · `planner` · `reviewer` | hard reasoning, planning, review taste, coordination |
-| **sonnet-5** | `implementer` · `investigator` | clear-spec impl, code location, data analysis |
-| **fable-5** | `advisor` · impeccable / dispatch | steering/taste calls (rare, ~once/task), UI, copy, API-design |
-| **gpt-5.6-sol** | `codex review` CLI only | independent review perspective (review-only here) |
-| **haiku** | cavecrew-* | quick compressed lookups only |
+Pin down what "done" means; leave the path open. One capable model holding the whole task beats an assembly line of specialists — every handoff (spec → code → review) drops context, and a deterministic tool gives the same signal in a tighter loop than another model's opinion does.
 
-- Escalate freely: if a cheaper model's output misses the bar, rerun on a smarter one — judge the output, not the price tag.
-- For anything that ships: **intelligence > taste > cost**. Anything user-facing wants taste ≥ 7 (fable / impeccable). Never Haiku for judgment work.
+**Definition of Done** — the floor in every repo: test suite green, lint clean, plus whatever gates the repo's `AGENTS.md` lists (mutants, CRAP, brakeman, system tests). The hard rules above already cover red-first tests and honest reporting.
 
-## Team roster (who to dispatch)
+You choose *when* to run a gate, never *whether*. Slow gates run on changed files only. If a repo lacks a gate the change clearly needs, wiring it is in scope.
 
-- **`planner`** (opus, read-only) — design before code; reads domain docs first; produces a step plan. May ask questions.
-- **`implementer`** (sonnet) — executes clear specs, runs tests, iterates; states assumptions and proceeds; escalates design-level ambiguity.
-- **`reviewer`** (opus) — independent review; own pass + a `codex review` second perspective; terse, severity-tagged.
-- **`investigator`** (sonnet, read-only) — locate code (`file:line`) or analyze data (PostHog / SQL / eval rake). Findings only.
-- **`advisor`** (fable, read-only) — consult ONCE mid-task when stuck (2+ fails) or facing a design/taste/API call. Returns direction + why + trap, not code.
-- UI/copy work → the **impeccable** skill (+ fable for taste). Quick caveman lookups → **cavecrew-***.
+## Subagents: spawn on purpose, not by role
 
-## Cost patterns (Fable-steer, Sonnet-grind)
+`planner`, `implementer`, `reviewer`, `investigator`, `advisor` exist as agent definitions. None is a mandatory phase. Default is doing the work in the main thread; spawn only when it buys something one context can't:
 
-Fable is expensive per token but cheap when called *rarely*. Two patterns (per Anthropic's Managed-Agents benchmarks):
-- **Advisor:** sonnet executor does the work, consults `advisor` (fable) ~once for a steer → ~92% of Fable-solo quality at ~63% cost. Prefer this over escalating a whole task to opus.
-- **Orchestrator:** a fable planner fans out to sonnet workers → ~96% quality at ~46% cost on token-heavy parallel work. (Our `planner` stays opus for now; switch to fable only when cost bites on big fan-out.)
-- These are Claude-Code subagent patterns here, not the literal Managed-Agents API (that's SDK). Same economics: each subagent bills its own model.
+- **Context hygiene.** The bill is cache-reads of the main thread, re-read every turn. Big reads (map a dir, list callers, grep a log) go to a read-only `investigator`/`Explore`; only the compact answer comes back. Ask for evidence (`file:line` + excerpt), not verdicts, and spot-verify any load-bearing claim yourself — a confident-but-wrong summary is the real risk (it has happened).
+- **Fresh eyes.** The author of a diff believes it works; a `reviewer` in a fresh context doesn't. Worth it for big diffs, auth/money/data paths, unfamiliar areas, anything user-facing. Skip on greenfield and rote changes.
+- **Fan-out.** The same mechanical change across many files → parallel `implementer` workers. Map-reduce, not an assembly line.
+- **A steer when stuck.** Two failed attempts, or a real design/taste/API-shape fork → one `advisor` call. Direction, not code.
+
+Don't announce a phase plan and wait for sign-off. Don't spawn a fresh session to write a commit message or PR body the working context already holds.
+
+**Model hints, not rules.** Main thread runs Fable. `investigator`/`Explore` on sonnet — extraction quality is model-flat, the smarts are in the ask. `codex review` (gpt-5.6-sol) for an independent second read. `cavecrew-*` (haiku) for quick lookups only; never Haiku for judgment. UI/copy → the **impeccable** skill. Override per call whenever the output misses the bar.
 
 ## Operating rules
 
-- **State assumption and proceed.** Don't open with clarifying questions unless genuinely blocked — make a reasonable assumption, state it, proceed. (Exceptions: `planner`, and irreversible/outward-facing actions.)
+- **State assumption and proceed.** Don't open with clarifying questions unless genuinely blocked — make a reasonable assumption, state it, proceed. (Exceptions: irreversible/outward-facing actions, and readings of the ask that lead to materially different work.)
+- **Before a large task:** one line with success criteria + stop condition, then go. `/kickoff` when the scope itself is unclear.
 - **Layered:** universal here, project rules in the repo's `AGENTS.md`. Don't repeat.
 - **`grill-with-docs` is available on-demand** to pressure-test my understanding of unfamiliar tooling/APIs (pairs with "read source, stop guessing"). Invoke when useful — not a required gate.
-
-## Orchestration
-
-You are the orchestrator. Default to delegating, not grinding:
-1. Plan → 2. decompose → 3. route to the right agent → 4. review → 5. save lessons to memory.
-- Don't do mechanical work yourself unless it's trivial or I explicitly ask. Dispatch: design→`planner`, code+tests→`implementer`, review→`reviewer`, locate/data→`investigator`, quick steer→`advisor`.
-- Before a large task: state which agent handles each phase, the success criteria, and the stop condition — then confirm before executing.
-
-### Keep the main (opus) thread lean
-
-The opus bill is dominated by cache-reads of the *main thread's* context re-read every turn — not by "planning being hard." Every file I read inline and every raw tool dump sits in opus context forever. So:
-
-- **Delegate the reads.** Locate/extract (where is X, what's in these files, list callers, map a dir) → `investigator`/`Explore`. The raw file dumps stay in the subagent; only a compact summary returns to opus. This is the biggest single lever. Extraction quality on sonnet ≈ opus — the smarts are in the ask + the synthesis, which stay with me.
-- **Delegate the *finding*, keep the *deciding*.** Ask subagents for evidence (`file:line` + excerpts), not verdicts. Then judge on facts, not on a weaker model's read of them. **Spot-verify any load-bearing claim myself** (is it merged? does this validation run on update?) — a confident-but-wrong subagent summary is the real risk (it has happened: an Explore agent falsely reported a branch "not merged").
-- **Fold artifact prose into the executor.** Have `implementer` (which already holds the diff cheaply) also emit the commit message + PR body + suggested ticket comment in its return. Opus then only runs the mechanical `git`/`gh`/issue-tracker plumbing with that text. Don't spawn a *fresh* session just to write commits/PRs/tickets — cold re-derive of context for tiny output costs more than doing it, and adds a second context to populate.
-- **Cheaper reviewer for mechanical diffs** — route to sonnet or codex-only when the change is rote; reserve the opus `reviewer` for judgment-heavy diffs.
-- **Route by cognitive load, not by habit.** Interpretation-heavy reads (gnarly state machine, "what are the invariants") can run the subagent *on opus* (model is per-agent, overridable) or stay inline. Delegating ≠ always sonnet.
 
 ## Loops
 
 For multi-step work, run a controlled loop, not one-shot prompts: `goal → plan → execute → verify → (fail routes back) → stop`. Use the native `/loop` for this.
 **Always set a stop condition** — no finish line = token leak. Good ones:
-- "stop when tests pass and lint is clean"
+- "stop when the Definition of Done holds"
 - "stop when the plan lists every file group, risk, and rollback path"
 - "stop after 3 failed attempts and produce a blocker report"
