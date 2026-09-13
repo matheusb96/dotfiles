@@ -134,7 +134,7 @@ ln -sf "$PWD/agents/AGENTS.md" ~/.claude/CLAUDE.md   # Claude Code reads CLAUDE.
 ln -sf "$PWD/agents/AGENTS.md" ~/.codex/AGENTS.md    # Codex reads AGENTS.md
 for s in "$PWD"/agents/skills/*/; do
   n="$(basename "$s")"
-  ln -sfn "$s" ~/.agents/skills/"$n"                  # cross-tool skill dir
+  ln -sfn "$s" ~/.agents/skills/"$n"                  # Codex reads this dir natively
   ln -sfn ../../.agents/skills/"$n" ~/.claude/skills/"$n"
 done
 
