@@ -128,21 +128,30 @@ ln -sf "$PWD/ghostty/config" \
 # Neovim (LazyVim) — symlink the whole directory
 ln -sfn "$PWD/nvim" ~/.config/nvim
 
+# Agent brief + skills — one source, every harness
+mkdir -p ~/.claude/skills ~/.agents/skills ~/.codex
+ln -sf "$PWD/agents/AGENTS.md" ~/.claude/CLAUDE.md   # Claude Code reads CLAUDE.md
+ln -sf "$PWD/agents/AGENTS.md" ~/.codex/AGENTS.md    # Codex reads AGENTS.md
+for s in "$PWD"/agents/skills/*/; do
+  n="$(basename "$s")"
+  ln -sfn "$s" ~/.agents/skills/"$n"                  # Codex reads this dir natively
+  ln -sfn ../../.agents/skills/"$n" ~/.claude/skills/"$n"
+done
+
 # Claude Code — link individual items, never the whole ~/.claude directory
 # (it also holds history.jsonl, caches, and credentials, which must stay out of git)
-mkdir -p ~/.claude/skills
-ln -sf  "$PWD/claude/CLAUDE.md"     ~/.claude/CLAUDE.md
 ln -sf  "$PWD/claude/settings.json" ~/.claude/settings.json
-ln -sfn "$PWD/claude/agents"        ~/.claude/agents
 ln -sfn "$PWD/claude/hooks"         ~/.claude/hooks
-for s in "$PWD"/claude/skills/*/; do ln -sfn "$s" ~/.claude/skills/"$(basename "$s")"; done
 ```
 
 Back up any existing target before symlinking over it — `ln -sf` will replace it.
 
 `~/.claude/skills` also fills up with plugin- and marketplace-installed skills.
-Only the ones in `claude/skills/` here are ours; the rest are reinstalled by
+Only the ones in `agents/skills/` here are ours; the rest are reinstalled by
 Claude Code itself and are not tracked.
+
+Per repo: Claude Code ignores `AGENTS.md`, so give each project a one-line
+`CLAUDE.md` containing `@AGENTS.md`. One source of truth, every harness reads it.
 
 ## Machine-local config
 
@@ -153,7 +162,7 @@ functions) goes there. It is deliberately not tracked in this repo.
 ## Verify
 
 ```sh
-ls -ld ~/.zshrc ~/.config/nvim ~/.claude/CLAUDE.md   # symlinks into this repo
+ls -ld ~/.zshrc ~/.config/nvim ~/.claude/CLAUDE.md ~/.codex/AGENTS.md   # symlinks into this repo
 ls -ld "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 ghostty +show-config | grep theme                    # config is actually being read
 nvim --headless "+qa"                                # starts clean, no errors

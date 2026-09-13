@@ -17,7 +17,7 @@ disable-model-invocation: true
 ## Access model (universal, non-negotiable)
 
 - **No prod access from the agent.** It authors the query; the user runs it on prod (console or SQL client) and pastes results back.
-- **Read-only only.** Never write, mutate, migrate, or reset. If a fix is warranted, hand off to `implementer` afterward.
+- **Read-only only.** Never write, mutate, migrate, or reset. If a fix is warranted, do it afterward in a separate, explicit step.
 - **Respect encryption.** If the project encrypts the fields you need (message bodies, PII), raw SQL shows ciphertext — emit a **console/ORM** query that decrypts instead. Otherwise SQL is fine.
 - **Scope to the tenant/record.** Never dump broad tables; filter to the one identifier.
 
@@ -26,7 +26,7 @@ disable-model-invocation: true
 Look for the project's forensics schema, in order:
 1. `docs/agents/forensics.md` in the repo (preferred — the per-project binding).
 2. A "forensics"/timeline section in the repo `AGENTS.md`/`CLAUDE.md`.
-3. **If none exists:** dispatch the `investigator` agent to map it — how an identifier (id / phone / email / uuid) resolves to the record, then to its ordered timeline (messages, events, actions, status changes, outcome), and **which fields are encrypted**. Then offer to save that map to `docs/agents/forensics.md` so it's a one-time cost (the user commits it).
+3. **If none exists:** map it yourself (a read-only subagent if the codebase is big) — how an identifier (id / phone / email / uuid) resolves to the record, then to its ordered timeline (messages, events, actions, status changes, outcome), and **which fields are encrypted**. Then offer to save that map to `docs/agents/forensics.md` so it's a one-time cost (the user commits it).
 
 ## Step 2 — emit the read-only query
 
@@ -41,7 +41,7 @@ Reconstruct plainly (in the project's language/locale):
 1. **What the actor wanted** — from their inputs / classified intent.
 2. **What the system did** — responses, actions/tools invoked (+ failures), state changes.
 3. **Where it went wrong** — the specific step: misclassification, failed action, wrong response, missed escalation, stale data.
-4. **Verdict + next step** — real bug → `planner`/`implementer`; data/config issue → say so.
+4. **Verdict + next step** — real bug → fix in a separate step; data/config issue → say so.
 
 Keep it a tight timeline read, not a dump. If the paste is truncated or a field is empty, say what else to pull rather than guessing.
 

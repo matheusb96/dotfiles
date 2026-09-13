@@ -10,11 +10,11 @@ disable-model-invocation: true
 
 # kickoff
 
-`/kickoff <big task>` turns a large, vague job into a structured brief **before execution** — goal, scope, constraints, plan-first, model routing, and a definition of done. It is the antidote to "refactor this" → expensive chaos. Plan first, execute after approval.
+`/kickoff <big task>` turns a large, vague job into a structured brief **before execution** — goal, scope, constraints, plan-first, and a definition of done. It is the antidote to "refactor this" → expensive chaos. Plan first, execute after approval.
 
 ## When to use
 
-Big or risky work: codebase-wide migrations, large refactors, complex product builds, multi-step debugging with many constraints. Not for small scoped edits (just dispatch `implementer`).
+Big or risky work: codebase-wide migrations, large refactors, complex product builds, multi-step debugging with many constraints. Not for small scoped edits (just do them).
 
 ## Produce this brief
 
@@ -40,11 +40,6 @@ Fill every section. Read the relevant files/docs first (`AGENTS.md`, `CONTEXT.md
 Map the full plan before editing. List the files expected to touch, the risks,
 and the unknowns. **Wait for approval before executing.**
 
-## Routing (per the doctrine)
-- Design/plan: planner (opus)  ·  steer when stuck: advisor (fable)
-- Implementation: implementer (sonnet)
-- Review: reviewer (opus + codex)  ·  extra pass: /codex-review
-
 ## Definition of done
 - [ ] Tests pass (name the command)
 - [ ] Changed files summarized
@@ -58,5 +53,5 @@ and the unknowns. **Wait for approval before executing.**
 ## Then
 
 1. Present the brief. **Do not edit anything yet** — get approval on scope + plan.
-2. On approval, run the loop: dispatch `planner` for the detailed design, then `implementer` per chunk, then `reviewer`. Route per the doctrine.
+2. On approval, run the loop chunk by chunk against the definition of done. Spawn subagents only for what the brief allows (big reads, fresh-eyes review, fan-out) — no specifier → coder → reviewer relay.
 3. Hold to the stop condition. If blocked, produce the blocker report instead of grinding.
